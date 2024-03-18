@@ -5,9 +5,11 @@ File paths of the Photos.sqlite used to create queries:
 Photos.sqlite databases used can be found at the following file paths:
 
 iOS Photos Application (com.apple.MobileSlideShow) database:
+
 •	\private\var\mobile\Media\PhotoData\Photos.sqlite
 
 iOS Syndication Photo Library (also known as Shared With You) database:
+
 •	\private\var\mobile\Library\Photos\Libraries\Syndication.photoslibrary\database\Photos.sqlite
 
 Abbreviations used to shorten query names:
