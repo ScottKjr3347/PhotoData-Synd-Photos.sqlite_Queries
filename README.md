@@ -16,9 +16,11 @@ Abbreviations used to shorten query names:
 Even though most of the updated queries will work on both Photos.sqlite databases (PhotoData-Photos.sqlite and Syndication Photo Library-Photos.sqlite), I have included a list of abbreviations and terms that will be found within the query names. These abbreviations and terms found within the query file names were used to describe the database file paths, the databases themselves, and artifacts within the query results.    
 
 PhotoData and PhDaPs – If the term PhotoData or PhDaPs is within the query name, it indicates the query may be used on the Photos.sqlite located within: 
+
 •	*\Media\PhotoData\Photos.sqlite 
 
 Synd, SyndPL, and SyndPs – If the term Synd, SyndPL, and or SyndPs is within the query name, it indicates the query may be used on the Photos.sqlite located within:
+
 •	*\Libraries\Syndication.photoslibrary\database\Photos.sqlite
 
 Albums – If Albums is listed within the query name, it indicates the query will contain album records and or assets records that are within albums. These query results could have multiple records for an individual asset.     
