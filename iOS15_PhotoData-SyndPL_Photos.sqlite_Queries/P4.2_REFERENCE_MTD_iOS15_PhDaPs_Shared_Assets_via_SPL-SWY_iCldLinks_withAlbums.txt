@@ -1062,7 +1062,7 @@ SELECT CASE zAsset.ZCOMPLETE
   zGenAlbum.ZCUSTOMQUERYPARAMETERS AS 'zGenAlbum-Custom Query Parameters',
   SWYConverszGenAlbum.ZCUSTOMQUERYPARAMETERS AS 'SWYConverszGenAlbum-Custom Query Parameters',
   zGenAlbum.ZPROJECTDATA AS 'zGenAlbum-Project Data',
-  SWYConverszGenAlbum.ZPROJECTDATA AS 'SWYConverszGenAlbum-Project Data'  
+  SWYConverszGenAlbum.ZPROJECTDATA AS 'SWYConverszGenAlbum-Project Data'
 FROM ZASSET zAsset
   LEFT JOIN ZADDITIONALASSETATTRIBUTES zAddAssetAttr ON zAddAssetAttr.Z_PK = zAsset.ZADDITIONALATTRIBUTES
   LEFT JOIN ZEXTENDEDATTRIBUTES zExtAttr ON zExtAttr.Z_PK = zAsset.ZEXTENDEDATTRIBUTES

@@ -21,7 +21,7 @@ SELECT zAsset.Z_PK AS 'zAsset-zPK-4QueryStart',
     WHEN 8 THEN '8-iCloudLink_CloudMasterMomentAsset-8'
     WHEN 12 THEN '12-SyndPs-SWY-Asset_Auto-Display_In_CameraRoll-12'
     ELSE 'Unknown-New-Value!: ' || zAsset.ZSAVEDASSETTYPE || ''
-  END AS 'zAsset-Saved Asset Type',  
+  END AS 'zAsset-Saved Asset Type',
   zAsset.ZDIRECTORY AS 'zAsset-Directory/Path',
   zAsset.ZFILENAME AS 'zAsset-Filename',
   zAddAssetAttr.ZORIGINALFILENAME AS 'zAddAssetAttr- Original Filename',
@@ -37,7 +37,7 @@ SELECT zAsset.Z_PK AS 'zAsset-zPK-4QueryStart',
   DateTime(zAsset.ZLASTSHAREDDATE + 978307200, 'UNIXEPOCH') AS 'zAsset-Last Shared Date',
   DateTime(zCldMast.ZIMPORTDATE + 978307200, 'UNIXEPOCH') AS 'zCldMast-Import Date',
   zAsset.ZCLOUDDOWNLOADREQUESTS AS 'zAsset-Cloud Download Requests',
-  zAddAssetAttr.ZUPLOADATTEMPTS AS 'zAddAssetAttr-Upload Attempts',  
+  zAddAssetAttr.ZUPLOADATTEMPTS AS 'zAddAssetAttr-Upload Attempts',
   CASE zAsset.ZVISIBILITYSTATE
     WHEN 0 THEN '0-Visible-PL-CameraRoll-0'
     WHEN 2 THEN '2-Not-Visible-PL-CameraRoll-2'
@@ -78,7 +78,7 @@ SELECT zAsset.Z_PK AS 'zAsset-zPK-4QueryStart',
   zSharePartic.Z_PK AS 'zSharePartic-zPK-4TableStart',
   zSharePartic.ZEMAILADDRESS AS 'zSharePartic-Email Address',
   zSharePartic.ZPHONENUMBER AS 'zSharePartic-Phone Number',
-  zSharePartic.ZNAMECOMPONENTS AS 'zSharePartic-Name Components'  
+  zSharePartic.ZNAMECOMPONENTS AS 'zSharePartic-Name Components'
 FROM ZASSET zAsset
   LEFT JOIN ZADDITIONALASSETATTRIBUTES zAddAssetAttr ON zAddAssetAttr.Z_PK = zAsset.ZADDITIONALATTRIBUTES
   LEFT JOIN ZEXTENDEDATTRIBUTES zExtAttr ON zExtAttr.Z_PK = zAsset.ZEXTENDEDATTRIBUTES

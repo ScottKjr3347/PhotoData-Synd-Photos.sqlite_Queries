@@ -309,7 +309,7 @@ SELECT zAsset.Z_PK AS 'zAsset-zPK-4QueryStart',
   CASE SPLzShare.ZCLOUDDELETESTATE
     WHEN 0 THEN '0-Not Deleted-0'
     ELSE 'Unknown-New-Value!: ' || SPLzShare.ZCLOUDDELETESTATE || ''
-  END AS 'SPLzShare-Cloud Delete State-SPL',  
+  END AS 'SPLzShare-Cloud Delete State-SPL',
   CASE zShare.ZSHOULDIGNOREBUDGETS
     WHEN 1 THEN '1-StillTesting-CMM-1'
     ELSE 'Unknown-New-Value!: ' || zShare.ZSHOULDIGNOREBUDGETS || ''
