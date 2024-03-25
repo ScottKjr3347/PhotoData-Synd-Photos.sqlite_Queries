@@ -1,5 +1,6 @@
 # PhotoData-Synd-Photos.sqlite_Queries
 PhotoData – Photos.sqlite and Syndication Photo Library – Photos.sqlite Query Updates
+
 Hello again, if you have not already noticed, I moved the queries around on my GitHub in preparation of updates based on new research. The research will be published at a later time. Over the years I have had a few requests to provide additional information about each query and how each one can be used for a particular type of artifact. I have tried this once before but received some feedback that there were too many queries. Given the findings of my recent research, I have once again created several different queries that might assist with getting better defined results. The updates have been based on iOS versions 15.8.2 – 17.3.1, but some of these updates have been constructed to work with older iOS versions.  
 
 iOS Versions used to create queries:
