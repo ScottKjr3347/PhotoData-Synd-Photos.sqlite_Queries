@@ -82,7 +82,7 @@ Query names starting with 4.* are queries that will allow for analysis of data r
 Query names starting with 5.* are queries that will allow for analysis of data related to iCloud Shared Photo Library (SPL). These queries will provide data related to iCloud Shared Photo Library, data indicating the owner and participants of an asset and the library, and the status of invites to the iCloud Shared Photo Library. 
 
 6.*:
-Query names starting with 6.* are queries that will allow for analysis of data related to iCloud Shared Links. These queries will provide data related to iCloud Shared Links and data indicating who shared the assets.
+Query names starting with 6.* are queries that will allow for analysis of data related to Shared iCloud Links. These queries will provide data related to Shared iCloud Links and data indicating who shared the assets.
 
 7.*:
 Query names starting with 7.* are queries that will allow for analysis of data related to Syndication Photo Library and Shared with You Assets. These queries will provide data related to Syndication Photo Library (Shared with You) assets that may have been displayed in the local camera roll. Additionally the query results may include identifiers such as emails or phone numbers to identify who may have shared asset.  
