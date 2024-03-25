@@ -1,0 +1,305 @@
+SELECT zAsset.Z_PK AS 'zAsset-zPK-4QueryStart',
+  zAddAssetAttr.Z_PK AS 'zAddAssetAttr-zPK-4QueryStart',
+  zAsset.ZUUID AS 'zAsset-UUID = store.cloudphotodb-4QueryStart',
+  zAddAssetAttr.ZMASTERFINGERPRINT AS 'zAddAssetAttr-Master Fingerprint-4TableStart',
+  CASE zAsset.ZBUNDLESCOPE
+    WHEN 0 THEN '0-WheniCldPhtos-ON-AssetNotInSharedAlbum_or_WheniCldPhtos-OFF-AssetOnLocalDevice-0'
+    WHEN 1 THEN '1-SharediCldLink_CldMastMomentAsset-1'
+    WHEN 2 THEN '2-WheniCldPhtos-ON-AssetInCloudSharedAlbum-2'
+    WHEN 3 THEN '3-WheniCldPhtos-ON-AssetIsInSWYConversation-3'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZBUNDLESCOPE || ''
+  END AS 'zAsset-Bundle Scope',
+  CASE zAsset.ZCLOUDLOCALSTATE
+    WHEN 0 THEN '0-iCldPhotos_ON=Asset_In_Album-Conv_or_iCldPhotos_OFF=Asset_Not_Synced-0'
+    WHEN 1 THEN 'iCldPhotos ON=Asset_Can-Be-or-Has-Been_Synced_with_iCloud-1'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZCLOUDLOCALSTATE || ''
+  END AS 'zAsset-Cloud_Local_State',
+  CASE zAsset.ZVISIBILITYSTATE
+    WHEN 0 THEN '0-Visible-PL-CameraRoll-0'
+    WHEN 2 THEN '2-Not-Visible-PL-CameraRoll-2'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZVISIBILITYSTATE || ''
+  END AS 'zAsset-Visibility State',
+  zExtAttr.ZCAMERAMAKE AS 'zExtAttr-Camera Make',
+  zExtAttr.ZCAMERAMODEL AS 'zExtAttr-Camera Model',
+  CASE zAddAssetAttr.ZIMPORTEDBY
+    WHEN 0 THEN '0-Cloud-Other-0'
+    WHEN 1 THEN '1-Native-Back-Camera-1'
+    WHEN 2 THEN '2-Native-Front-Camera-2'
+    WHEN 3 THEN '3-Third-Party-App-3'
+    WHEN 4 THEN '4-StillTesting-4'
+    WHEN 5 THEN '5-PhotoBooth_PL-Asset-5'
+    WHEN 6 THEN '6-Third-Party-App-6'
+    WHEN 7 THEN '7-iCloud_Share_Link-CMMAsset-7'
+    WHEN 8 THEN '8-System-Package-App-8'
+    WHEN 9 THEN '9-Native-App-9'
+    WHEN 10 THEN '10-StillTesting-10'
+    WHEN 11 THEN '11-StillTesting-11'
+    WHEN 12 THEN '12-SWY_Syndication_PL-12'
+    ELSE 'Unknown-New-Value!: ' || zAddAssetAttr.ZIMPORTEDBY || ''
+  END AS 'zAddAssetAttr-Imported by',
+  zAddAssetAttr.ZIMPORTEDBYBUNDLEIDENTIFIER AS 'zAddAssetAttr.Imported by Bundle Identifier',
+  zAddAssetAttr.ZIMPORTEDBYDISPLAYNAME AS 'zAddAssetAttr-Imported By Display Name',
+  CASE zAsset.ZSAVEDASSETTYPE
+    WHEN 0 THEN '0-Saved-via-other-source-0'
+    WHEN 1 THEN '1-StillTesting-1'
+    WHEN 2 THEN '2-StillTesting-2'
+    WHEN 3 THEN '3-PhDaPs-Asset_or_SyndPs-Asset_NoAuto-Display-3'
+    WHEN 4 THEN '4-Photo-Cloud-Sharing-Data-Asset-4'
+    WHEN 5 THEN '5-PhotoBooth_Photo-Library-Asset-5'
+    WHEN 6 THEN '6-Cloud-Photo-Library-Asset-6'
+    WHEN 7 THEN '7-StillTesting-7'
+    WHEN 8 THEN '8-iCloudLink_CloudMasterMomentAsset-8'
+    WHEN 12 THEN '12-SyndPs-SWY-Asset_Auto-Display_In_CameraRoll-12'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZSAVEDASSETTYPE || ''
+  END AS 'zAsset-Saved Asset Type',
+  zAsset.ZDIRECTORY AS 'zAsset-Directory/Path',
+  zAsset.ZFILENAME AS 'zAsset-Filename',
+  zAddAssetAttr.ZORIGINALFILENAME AS 'zAddAssetAttr- Original Filename',
+  zCldMast.ZORIGINALFILENAME AS 'zCldMast- Original Filename',
+  zAddAssetAttr.ZSYNDICATIONIDENTIFIER AS 'zAddAssetAttr- Syndication Identifier-SWY-Files',
+  CASE zAsset.ZACTIVELIBRARYSCOPEPARTICIPATIONSTATE
+    WHEN 0 THEN '0-Asset-Not-In-Active-SPL-0'
+    WHEN 1 THEN '1-Asset-In-Active-SPL-1'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZACTIVELIBRARYSCOPEPARTICIPATIONSTATE || ''
+  END AS 'zAsset-Active Library Scope Participation State -4QueryStart',
+  CASE zAsset.ZLIBRARYSCOPESHARESTATE
+    WHEN 0 THEN '0-Asset-Not-In-SPL-0'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZLIBRARYSCOPESHARESTATE || ''
+  END AS 'zAsset-Library Scope Share State- StillTesting -4QueryStart',
+  SPLzShare.ZCLOUDPHOTOCOUNT AS 'SPLzShare-Cloud Photo Count-SPL -4QueryStart',
+  SPLzShare.ZCLOUDVIDEOCOUNT AS 'SPLzShare-Cloud Video Count-SPL -4QueryStart',
+  DateTime(zAsset.ZADDEDDATE + 978307200, 'UNIXEPOCH') AS 'zAsset-Added Date',
+  CASE zAddAssetAttr.ZDATECREATEDSOURCE
+    WHEN 0 THEN '0-Cloud-Asset-0'
+    WHEN 1 THEN '1-Local_Asset_EXIF-1'
+    WHEN 3 THEN '3-Local_Asset_No_EXIF-3'
+    ELSE 'Unknown-New-Value!: ' || zAddAssetAttr.ZDATECREATEDSOURCE || ''
+  END AS 'zAddAssetAttr-Date Created Source',
+  DateTime(zAsset.ZDATECREATED + 978307200, 'UNIXEPOCH') AS 'zAsset-Date Created',
+  DateTime(zCldMast.ZCREATIONDATE + 978307200, 'UNIXEPOCH') AS 'zCldMast-Creation Date',
+  zAddAssetAttr.ZTIMEZONENAME AS 'zAddAssetAttr-Time Zone Name',
+  zAddAssetAttr.ZTIMEZONEOFFSET AS 'zAddAssetAttr-Time Zone Offset',
+  zAddAssetAttr.ZEXIFTIMESTAMPSTRING AS 'zAddAssetAttr-EXIF-String',
+  DateTime(zAsset.ZMODIFICATIONDATE + 978307200, 'UNIXEPOCH') AS 'zAsset-Modification Date',
+  DateTime(zAddAssetAttr.ZLASTVIEWEDDATE + 978307200, 'UNIXEPOCH') AS 'zAddAssetAttr-Last Viewed Date',
+  DateTime(zAsset.ZLASTSHAREDDATE + 978307200, 'UNIXEPOCH') AS 'zAsset-Last Shared Date',
+  CASE zCldMast.ZCLOUDLOCALSTATE
+    WHEN 0 THEN '0-Not Synced with Cloud-0'
+    WHEN 1 THEN '1-Pending Upload-1'
+    WHEN 2 THEN '2-StillTesting'
+    WHEN 3 THEN '3-Synced with Cloud-3'
+    ELSE 'Unknown-New-Value!: ' || zCldMast.ZCLOUDLOCALSTATE || ''
+  END AS 'zCldMast-Cloud Local State',
+  DateTime(zCldMast.ZIMPORTDATE + 978307200, 'UNIXEPOCH') AS 'zCldMast-Import Date',
+  CASE zAsset.ZCLOUDPLACEHOLDERKIND
+    WHEN 0 THEN '0-Local&CloudMaster Asset-0'
+    WHEN 1 THEN '1-StillTesting-1'
+    WHEN 2 THEN '2-StillTesting-2'
+    WHEN 3 THEN '3-JPG-Asset_Only_PhDa/Thumb/V2-3'
+    WHEN 4 THEN '4-LPL-JPG-Asset_CPLAsset-OtherType-4'
+    WHEN 5 THEN '5-Asset_synced_CPL_2_Device-5'
+    WHEN 6 THEN '6-StillTesting-6'
+    WHEN 7 THEN '7-LPL-poster-JPG-Asset_CPLAsset-MP4-7'
+    WHEN 8 THEN '8-LPL-JPG_Asset_CPLAsset-LivePhoto-MOV-8'
+    WHEN 9 THEN '9-CPL_MP4_Asset_Saved_2_LPL-9'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZCLOUDPLACEHOLDERKIND || ''
+  END AS 'zAsset-Cloud Placeholder Kind',
+  zAddAssetAttr.ZEDITORBUNDLEID AS 'zAddAssetAttr-Editor Bundle ID',
+  CASE zAsset.ZFAVORITE
+    WHEN 0 THEN '0-Asset Not Favorite-0'
+    WHEN 1 THEN '1-Asset Favorite-1'
+  END AS 'zAsset-Favorite',
+  CASE zAsset.ZHIDDEN
+    WHEN 0 THEN '0-Asset Not Hidden-0'
+    WHEN 1 THEN '1-Asset Hidden-1'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZHIDDEN || ''
+  END AS 'zAsset-Hidden',
+  CASE zAsset.ZTRASHEDSTATE
+    WHEN 0 THEN '0-Asset Not In Trash/Recently Deleted-0'
+    WHEN 1 THEN '1-Asset In Trash/Recently Deleted-1'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZTRASHEDSTATE || ''
+  END AS 'zAsset-Trashed State/LocalAssetRecentlyDeleted',
+  DateTime(zAsset.ZTRASHEDDATE + 978307200, 'UNIXEPOCH') AS 'zAsset-Trashed Date',
+  zAsset.ZTRASHEDBYPARTICIPANT AS 'zAsset-Trashed by Participant= zSharePartic_zPK-4QueryStart',
+  CASE zAsset.ZCLOUDDELETESTATE
+    WHEN 0 THEN '0-Cloud Asset Not Deleted-0'
+    WHEN 1 THEN '1-Cloud Asset Deleted-1'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZCLOUDDELETESTATE || ''
+  END AS 'zAsset-Cloud Delete State',
+  DateTime(zAsset.ZANALYSISSTATEMODIFICATIONDATE + 978307200, 'UNIXEPOCH') AS 'zAsset-Analysis State Modificaion Date',
+  zAddAssetAttr.ZPENDINGVIEWCOUNT AS 'zAddAssetAttr- Pending View Count',
+  zAddAssetAttr.ZVIEWCOUNT AS 'zAddAssetAttr- View Count',
+  zAddAssetAttr.ZPENDINGPLAYCOUNT AS 'zAddAssetAttr- Pending Play Count',
+  zAddAssetAttr.ZPLAYCOUNT AS 'zAddAssetAttr- Play Count',
+  zAddAssetAttr.ZPENDINGSHARECOUNT AS 'zAddAssetAttr- Pending Share Count',
+  zAddAssetAttr.ZSHARECOUNT AS 'zAddAssetAttr- Share Count',
+  CASE zAddAssetAttr.ZSHARETYPE
+    WHEN 0 THEN '0-Not_Shared-or-Shared_via_Phy_Device_StillTesting-0'
+    WHEN 1 THEN '1-Shared_via_iCldPhotos_Web-or-Other_Device_StillTesting-1'
+    ELSE 'Unknown-New-Value!: ' || zAddAssetAttr.ZSHARETYPE || ''
+  END AS 'zAddAssetAttr-Share Type',
+  zAsset.ZAVALANCHEUUID AS 'zAsset-Avalanche UUID-4TableStart',
+  CASE zAsset.ZAVALANCHEPICKTYPE
+    WHEN 0 THEN '0-NA/Single_Asset_Burst_UUID-0_RT'
+    WHEN 2 THEN '2-Burst_Asset_Not_Selected-2_RT'
+    WHEN 4 THEN '4-Burst_Asset_PhotosApp_Picked_KeyImage-4_RT'
+    WHEN 8 THEN '8-Burst_Asset_Selected_for_LPL-8_RT'
+    WHEN 16 THEN '16-Top_Burst_Asset_inStack_KeyImage-16_RT'
+    WHEN 32 THEN '32-StillTesting-32_RT'
+    WHEN 52 THEN '52-Burst_Asset_Visible_LPL-52'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZAVALANCHEPICKTYPE || ''
+  END AS 'zAsset-Avalanche_Pick_Type/BurstAsset',
+  CASE zAddAssetAttr.ZCLOUDAVALANCHEPICKTYPE
+    WHEN 0 THEN '0-NA/Single_Asset_Burst_UUID-0_RT'
+    WHEN 2 THEN '2-Burst_Asset_Not_Selected-2_RT'
+    WHEN 4 THEN '4-Burst_Asset_PhotosApp_Picked_KeyImage-4_RT'
+    WHEN 8 THEN '8-Burst_Asset_Selected_for_LPL-8_RT'
+    WHEN 16 THEN '16-Top_Burst_Asset_inStack_KeyImage-16_RT'
+    WHEN 32 THEN '32-StillTesting-32_RT'
+    WHEN 52 THEN '52-Burst_Asset_Visible_LPL-52'
+    ELSE 'Unknown-New-Value!: ' || zAddAssetAttr.ZCLOUDAVALANCHEPICKTYPE || ''
+  END AS 'zAddAssetAttr-Cloud_Avalanche_Pick_Type/BurstAsset',
+  CASE zAsset.ZLIBRARYSCOPESHARESTATE
+    WHEN 0 THEN '0-Asset-Not-In-SPL-0'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZLIBRARYSCOPESHARESTATE || ''
+  END AS 'zAsset-Library Scope Share State- StillTesting',
+  CASE zAsset.ZACTIVELIBRARYSCOPEPARTICIPATIONSTATE
+    WHEN 0 THEN '0-Asset-Not-In-Active-SPL-0'
+    WHEN 1 THEN '1-Asset-In-Active-SPL-1'
+    ELSE 'Unknown-New-Value!: ' || zAsset.ZACTIVELIBRARYSCOPEPARTICIPATIONSTATE || ''
+  END AS 'zAsset-Active Library Scope Participation State',
+  zAddAssetAttr.ZLIBRARYSCOPEASSETCONTRIBUTORSTOUPDATE AS 'zAddAssetAttr-Library Scope Asset Contributors To Update',
+  SPLzShare.ZUUID AS 'SPLzShare-UUID-SPL-4TableStart',
+  CASE SPLzShare.Z_ENT
+    WHEN 55 THEN '55-SPL-Entity-55'
+    WHEN 56 THEN '56-CMM-iCloud-Link-Entity-56'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.Z_ENT || ''
+  END AS 'SPLzShare-zENT-SPL',
+  CASE SPLzSharePartic.Z54_SHARE
+    WHEN 55 THEN '55-SPL-Entity-55'
+    WHEN 56 THEN '56-CMM-iCloud-Link-Entity-56'
+    ELSE 'Unknown-New-Value!: ' || SPLzSharePartic.Z54_SHARE || ''
+  END AS 'SPLzSharePartic-z54SHARE',
+  CASE SPLzShare.ZSTATUS
+    WHEN 1 THEN '1-Active_Share-CMM_or_SPL-1'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZSTATUS || ''
+  END AS 'SPLzShare-Status-SPL',
+  CASE SPLzShare.ZSCOPETYPE
+    WHEN 2 THEN '2-iCloudLink-CMMoment-2'
+    WHEN 4 THEN '4-iCld-Shared-Photo-Library-SPL-4'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZSCOPETYPE || ''
+  END AS 'SPLzShare-Scope Type-SPL',
+  CASE SPLzShare.ZLOCALPUBLISHSTATE
+    WHEN 2 THEN '2-Published-2'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZLOCALPUBLISHSTATE || ''
+  END AS 'SPLzShare-Local Publish State-SPL',
+  CASE SPLzShare.ZPUBLICPERMISSION
+    WHEN 1 THEN '1-Public_Premission_Denied-Private-1'
+    WHEN 2 THEN '2-Public_Premission_Granted-Public-2'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZPUBLICPERMISSION || ''
+  END AS 'SPLzShare-Public Permission-SPL',
+  SPLzShare.ZORIGINATINGSCOPEIDENTIFIER AS 'SPLzShare-Originating Scope ID-SPL',
+  SPLzShare.ZSCOPEIDENTIFIER AS 'SPLzShare-Scope ID-SPL',
+  SPLzShare.ZTITLE AS 'SPLzShare-Title-SPL',
+  SPLzShare.ZSHAREURL AS 'SPLzShare-Share URL-SPL',
+  DateTime(SPLzShare.ZCREATIONDATE + 978307200, 'UNIXEPOCH') AS 'SPLzShare-Creation Date-SPL',
+  DateTime(SPLzShare.ZEXPIRYDATE + 978307200, 'UNIXEPOCH') AS 'SPLzShare-Expiry Date-SPL',
+  SPLzShare.ZCLOUDPHOTOCOUNT AS 'SPLzShare-Cloud Photo Count-SPL',
+  SPLzShare.ZCOUNTOFASSETSADDEDBYCAMERASMARTSHARING AS 'SPLzShare-CountOfAssets AddedByCamera Smart Sharing-HomeShare-SPL',
+  SPLzShare.ZCLOUDVIDEOCOUNT AS 'SPLzShare-Cloud Video Count-SPL',
+  CASE SPLzShare.ZCLOUDLOCALSTATE
+    WHEN 1 THEN '1-LocalandCloud-SPL-1'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZCLOUDLOCALSTATE || ''
+  END AS 'SPLzShare-Cloud Local State-SPL',
+  CASE SPLzShare.ZSCOPESYNCINGSTATE
+    WHEN 1 THEN '1-ScopeAllowedToSync-SPL-StillTesting-1'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZSCOPESYNCINGSTATE || ''
+  END AS 'SPLzShare-Scope Syncing State-SPL',
+  CASE SPLzShare.ZAUTOSHAREPOLICY
+    WHEN 0 THEN '0-AutoShare-OFF_SPL_Test_NotAllAtSetup-0'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZAUTOSHAREPOLICY || ''
+  END AS 'SPLzShare-Auto Share Policy-SPL',
+  CASE SPLzShare.ZSHOULDNOTIFYONUPLOADCOMPLETION
+    WHEN 0 THEN '0-DoNotNotify-SPL-0'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZSHOULDNOTIFYONUPLOADCOMPLETION || ''
+  END AS 'SPLzShare-Should Notify On Upload Completion-SPL',
+  zAsset.ZTRASHEDBYPARTICIPANT AS 'zAsset-Trashed by Participant= zSharePartic_zPK-SPL-CMM',
+  CASE SPLzShare.ZTRASHEDSTATE
+    WHEN 0 THEN '0-Not_in_Trash-0'
+    WHEN 1 THEN '1-In_Trash-1'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZTRASHEDSTATE || ''
+  END AS 'SPLzShare-Trashed State-SPL',
+  CASE SPLzShare.ZCLOUDDELETESTATE
+    WHEN 0 THEN '0-Not Deleted-0'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZCLOUDDELETESTATE || ''
+  END AS 'SPLzShare-Cloud Delete State-SPL',
+  DateTime(SPLzShare.ZTRASHEDDATE + 978307200, 'UNIXEPOCH') AS 'SPLzShare-Trashed Date-SPL',
+  DateTime(SPLzShare.ZLASTPARTICIPANTASSETTRASHNOTIFICATIONDATE + 978307200, 'UNIXEPOCH') AS 'SPLzShare-LastParticipant Asset Trash Notification Date-SPL',
+  DateTime(SPLzShare.ZLASTPARTICIPANTASSETTRASHNOTIFICATIONVIEWEDDATE + 978307200, 'UNIXEPOCH') AS 'SPLzShare-Last Participant Asset Trash Notification View Date-SPL',
+  CASE SPLzShare.ZEXITSOURCE
+    WHEN 0 THEN '0-NA_SPL_StillTesting'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZEXITSOURCE || ''
+  END AS 'SPLzShare-Exit Source-SPL',
+  CASE SPLzShare.ZEXITSTATE
+    WHEN 0 THEN '0-NA_SPL_StillTesting'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZEXITSTATE || ''
+  END AS 'SPLzShare-SPL_Exit State-SPL',
+  CASE SPLzShare.ZEXITTYPE
+    WHEN 0 THEN '0-NA_SPL_StillTesting'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZEXITTYPE || ''
+  END AS 'SPLzShare-Exit Type-SPL',
+  CASE SPLzShare.ZSHOULDIGNOREBUDGETS
+    WHEN 1 THEN '1-StillTesting-CMM-1'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZSHOULDIGNOREBUDGETS || ''
+  END AS 'SPLzShare-Should Ignor Budgets-SPL',
+  CASE SPLzShare.ZPREVIEWSTATE
+    WHEN 0 THEN '0-NotInPreviewState-StillTesting-SPL-0'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZPREVIEWSTATE || ''
+  END AS 'SPLzShare-Preview State-SPL',
+  SPLzShare.ZPREVIEWDATA AS 'SPLzShare-Preview Data-SPL',
+  SPLzShare.ZRULESDATA AS 'SPLzShare-Rules-SPL',
+  SPLzShare.ZTHUMBNAILIMAGEDATA AS 'SPLzShare-Thumbnail Image Data-SPL',
+  CASE SPLzShare.ZPARTICIPANTCLOUDUPDATESTATE
+    WHEN 2 THEN '2-ParticipantAllowedToUpdate_SPL_StillTesting-2'
+    ELSE 'Unknown-New-Value!: ' || SPLzShare.ZPARTICIPANTCLOUDUPDATESTATE || ''
+  END AS 'SPLzShare-Participant Cloud Update State-SPL',
+  SPLzSharePartic.ZUUID AS 'SPLzSharePartic-UUID-4TableStart',
+  CASE SPLzSharePartic.ZACCEPTANCESTATUS
+    WHEN 1 THEN '1-Invite-Pending_or_Declined-1'
+    WHEN 2 THEN '2-Invite-Accepted-2'
+    ELSE 'Unknown-New-Value!: ' || SPLzSharePartic.ZACCEPTANCESTATUS || ''
+  END AS 'SPLzSharePartic-Acceptance Status',
+  CASE SPLzSharePartic.ZISCURRENTUSER
+    WHEN 0 THEN '0-Participant-Not_CloudStorageOwner-0'
+    WHEN 1 THEN '1-Participant-Is_CloudStorageOwner-1'
+    ELSE 'Unknown-New-Value!: ' || SPLzSharePartic.ZISCURRENTUSER || ''
+  END AS 'SPLzSharePartic-Is Current User',
+  CASE SPLzSharePartic.ZROLE
+    WHEN 1 THEN '1-Participant-is-Owner-Role-1'
+    WHEN 2 THEN '2-Participant-is-Invitee-Role-2'
+    ELSE 'Unknown-New-Value!: ' || SPLzSharePartic.ZROLE || ''
+  END AS 'SPLzSharePartic-Role',
+  CASE SPLzSharePartic.ZPERMISSION
+    WHEN 3 THEN '3-Participant-has-Full-Premissions-3'
+    ELSE 'Unknown-New-Value!: ' || SPLzSharePartic.ZPERMISSION || ''
+  END AS 'SPLzSharePartic-Premission',
+  SPLzSharePartic.ZPARTICIPANTID AS 'SPLzSharePartic-Participant ID',
+  SPLzSharePartic.ZUSERIDENTIFIER AS 'SPLzSharePartic-User ID',
+  zAssetContrib.ZPARTICIPANT AS 'zAsstContrib-Participant= zSharePartic-zPK-4TableStart',
+  SPLzSharePartic.Z_PK AS 'SPLzSharePartic-zPK-4TableStart',
+  SPLzSharePartic.ZEMAILADDRESS AS 'SPLzSharePartic-Email Address',
+  SPLzSharePartic.ZPHONENUMBER AS 'SPLzSharePartic-Phone Number',
+  SPLzSharePartic.ZNAMECOMPONENTS AS 'SPLzSharePartic-Name Components',
+  CASE SPLzSharePartic.ZEXITSTATE
+    WHEN 0 THEN '0-NA_SPL_StillTesting'
+    ELSE 'Unknown-New-Value!: ' || SPLzSharePartic.ZEXITSTATE || ''
+  END AS 'SPLzSharePartic-Exit State'
+FROM ZASSET zAsset
+  LEFT JOIN ZADDITIONALASSETATTRIBUTES zAddAssetAttr ON zAddAssetAttr.Z_PK = zAsset.ZADDITIONALATTRIBUTES
+  LEFT JOIN ZEXTENDEDATTRIBUTES zExtAttr ON zExtAttr.Z_PK = zAsset.ZEXTENDEDATTRIBUTES
+  LEFT JOIN ZCLOUDMASTER zCldMast ON zAsset.ZMASTER = zCldMast.Z_PK
+  LEFT JOIN ZSHARE SPLzShare ON SPLzShare.Z_PK = zAsset.ZLIBRARYSCOPE
+  LEFT JOIN ZASSETCONTRIBUTOR zAssetContrib ON zAssetContrib.Z3LIBRARYSCOPEASSETCONTRIBUTORS = zAsset.Z_PK
+  LEFT JOIN ZSHAREPARTICIPANT SPLzSharePartic ON SPLzSharePartic.Z_PK = zAssetContrib.ZPARTICIPANT
+WHERE zAsset.ZACTIVELIBRARYSCOPEPARTICIPATIONSTATE = 1
+ORDER BY zAsset.ZADDEDDATE
